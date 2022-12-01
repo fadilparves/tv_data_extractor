@@ -39,9 +39,12 @@ for tfs in timeframes:
 time.sleep(3)
 
 for i in range(14):
-    actions = ActionChains(driver)
-    actions.send_keys(Keys.CONTROL, Keys.ARROW_DOWN)
-    actions.perform()
+    time.sleep(2)
+    action = ActionChains(driver)
+    action.key_down(Keys.CONTROL)
+    action.send_keys(Keys.ARROW_DOWN)
+    action.key_up(Keys.CONTROL)
+    action.perform()
 
 time.sleep(5)
 
