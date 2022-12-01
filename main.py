@@ -5,7 +5,7 @@ from selenium.webdriver.common.keys import Keys
 
 options = webdriver.ChromeOptions()
 options.add_argument("--start-maximized")
-driver = webdriver.Chrome("C:/\bin/\chromedriver", hrome_options=options)  # Optional argument, if not specified will search path.
+driver = webdriver.Chrome("C:/\bin/\chromedriver", chrome_options=options)  # Optional argument, if not specified will search path.
 driver.get('https://www.tradingview.com/chart');
 
 time.sleep(5)
@@ -22,16 +22,18 @@ search_box = driver.find_element(By.XPATH, '//*[@id="overlap-manager-root"]/div/
 search_box.send_keys('FCPOG2023')
 search_box.send_keys(Keys.RETURN)
 
-time.sleep(2)
+time.sleep(5)
 
 timeframe_selector = driver.find_element(By.XPATH, '/html/body/div[3]/div[3]/div/div/div[1]/div/div/div/div/div/div[4]')
 timeframe_selector.click()
 
 time.sleep(1)
 
-timeframes = driver.find_elements(By.XPATH, '//*[@id="overlap-manager-root"]/div/span/div[1]/div/div/div/div[10]/div/span[1]/span')
+timeframes = driver.find_elements(By.CSS_SELECTOR, 'span.label-RhC5uhZw')
 for tfs in timeframes:
-    print(tfs.text)
+    if tfs.text == "5 minutes":
+        tfs.click()
+        break
 
 time.sleep(5)
 
