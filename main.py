@@ -3,11 +3,45 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 options = webdriver.ChromeOptions()
 options.add_argument("--start-maximized")
 driver = webdriver.Chrome("C:/\bin/\chromedriver", chrome_options=options)
-driver.get('https://www.tradingview.com/chart');
+
+driver.get('https://www.tradingview.com/')
+
+time.sleep(3)
+
+auth_person = driver.find_element(By.XPATH, '/html/body/div[3]/div[3]/div[2]/div[3]/button[1]')
+auth_person.click()
+
+time.sleep(2)
+
+sign_up_form = driver.find_element(By.XPATH, '//*[@id="overlap-manager-root"]/div/span/div[1]/div/div/div/button[1]/span/span')
+sign_up_form.click()
+
+time.sleep(2)
+
+sign_up_form = driver.find_element(By.XPATH, '//*[@id="overlap-manager-root"]/div/div[2]/div/div/div/div/div/div/div[1]/div[4]/div/span')
+sign_up_form.click()
+
+time.sleep(2)
+
+username_field = driver.find_element(By.NAME, 'username')
+username_field.send_keys(os.environ["tv_username"])
+
+password_field = driver.find_element(By.NAME, 'password')
+password_field.send_keys(os.environ['tv_password'])
+
+password_field.submit()
+
+time.sleep(5)
+
+driver.get('https://www.tradingview.com/chart')
 
 time.sleep(5)
 
