@@ -2,10 +2,11 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
 
 options = webdriver.ChromeOptions()
 options.add_argument("--start-maximized")
-driver = webdriver.Chrome("C:/\bin/\chromedriver", chrome_options=options)  # Optional argument, if not specified will search path.
+driver = webdriver.Chrome("C:/\bin/\chromedriver", chrome_options=options)
 driver.get('https://www.tradingview.com/chart');
 
 time.sleep(5)
@@ -34,6 +35,13 @@ for tfs in timeframes:
     if tfs.text == "5 minutes":
         tfs.click()
         break
+
+time.sleep(3)
+
+for i in range(14):
+    actions = ActionChains(driver)
+    actions.send_keys(Keys.CONTROL, Keys.ARROW_DOWN)
+    actions.perform()
 
 time.sleep(5)
 
