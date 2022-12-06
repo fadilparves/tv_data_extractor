@@ -12,7 +12,7 @@ class TVExtractor:
         self.password = password
         self.download_path = download_path
         self.layout_id = layout_id
-        self.url = 'https://www.tradingview.com/'
+        self.url = 'https://www.tradingview.com'
         self.completed_tickers = []
 
     def init_driver(self):
@@ -83,18 +83,18 @@ class TVExtractor:
 
     def pull_data(self, driver):
 
+        try:
+            driver.get('{}/chart/{}/'.format(self.url, self.layout_id))
+        except Exception as e:
+            print(e)
+            return False
+
+        time.sleep(5)
+
         for ticker in self.tickers:
 
             if ticker in self.completed_tickers:
                 continue
-
-            time.sleep(5)
-
-            try:
-                driver.get('{}/chart/{}/'.format(self.url, self.layout_id))
-            except Exception as e:
-                print(e)
-                return False
 
             time.sleep(5)
 
