@@ -20,17 +20,17 @@ time.sleep(3)
 auth_person = driver.find_element(By.XPATH, '/html/body/div[3]/div[3]/div[2]/div[3]/button[1]')
 auth_person.click()
 
-time.sleep(3)
+time.sleep(5)
 
 sign_up_form = driver.find_element(By.XPATH, '//*[@id="overlap-manager-root"]/div/span/div[1]/div/div/div/button[1]/span/span')
 sign_up_form.click()
 
-time.sleep(2)
+time.sleep(5)
 
 sign_up_form = driver.find_element(By.XPATH, '//*[@id="overlap-manager-root"]/div/div[2]/div/div/div/div/div/div/div[1]/div[4]/div/span')
 sign_up_form.click()
 
-time.sleep(2)
+time.sleep(5)
 
 username_field = driver.find_element(By.NAME, 'username')
 username_field.send_keys(os.environ["tv_username"])
