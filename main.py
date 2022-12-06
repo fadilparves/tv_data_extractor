@@ -59,17 +59,6 @@ search_box.send_keys(Keys.RETURN)
 
 time.sleep(5)
 
-# timeframe_selector = driver.find_element(By.XPATH, '/html/body/div[3]/div[3]/div/div/div[1]/div/div/div/div/div/div[4]')
-# timeframe_selector.click()
-
-# time.sleep(1)
-
-# timeframes = driver.find_elements(By.CSS_SELECTOR, 'span.label-RhC5uhZw')
-# for tfs in timeframes:
-#     if tfs.text == "5 minutes":
-#         tfs.click()
-#         break
-
 action = ActionChains(driver)
 action.send_keys('5')
 action.key_down(Keys.ENTER)
@@ -89,6 +78,16 @@ for i in range(14):
     action = ActionChains(driver)
     action.key_down(Keys.CONTROL)
     action.send_keys(Keys.ARROW_DOWN)
+    action.key_up(Keys.CONTROL)
+    action.perform()
+
+time.sleep(5)
+
+for i in range(20):
+    time.sleep(1)
+    action = ActionChains(driver)
+    action.key_down(Keys.CONTROL)
+    action.send_keys(Keys.ARROW_LEFT)
     action.key_up(Keys.CONTROL)
     action.perform()
 
