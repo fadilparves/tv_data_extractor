@@ -45,10 +45,10 @@ driver.get('https://www.tradingview.com/chart/JqgggM9t/')
 
 time.sleep(5)
 
-watchlist = driver.find_element(By.XPATH, '/html/body/div[3]/div[6]/div/div[2]/div/div/div/div/div[1]')
-watchlist.click()
+# watchlist = driver.find_element(By.XPATH, '/html/body/div[3]/div[6]/div/div[2]/div/div/div/div/div[1]')
+# watchlist.click()
 
-time.sleep(1)
+# time.sleep(1)
 search_btn = driver.find_element(By.ID, "header-toolbar-symbol-search")
 search_btn.click()
 
