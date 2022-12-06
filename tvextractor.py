@@ -13,6 +13,7 @@ class TVExtractor:
         self.download_path = download_path
         self.layout_id = layout_id
         self.url = 'https://www.tradingview.com/'
+        self.completed_tickers = []
 
     def init_driver(self):
 
@@ -33,7 +34,7 @@ class TVExtractor:
             driver.get(self.url)
         except Exception as e:
             print(e)
-            return "Failed"
+            return False
 
         time.sleep(3)
 
@@ -42,7 +43,7 @@ class TVExtractor:
             auth_person.click()
         except Exception as e:
             print(e)
-            return "Failed"
+            return False
 
         time.sleep(5)
 
@@ -51,7 +52,7 @@ class TVExtractor:
             sign_up_form.click()
         except Exception as e:
             print(e)
-            return "Failed"
+            return False
 
         time.sleep(5)
 
@@ -60,7 +61,7 @@ class TVExtractor:
             sign_up_form.click()
         except Exception as e:
             print(e)
-            return "Failed"
+            return False
 
         time.sleep(5)
 
@@ -72,15 +73,20 @@ class TVExtractor:
             password_field.send_keys(self.password)
 
             password_field.submit()
+
+            time.sleep(2)
         except Exception as e:
             print(e)
-            return "Failed"
+            return False
 
-        return "Success"
+        return True
 
     def pull_data(self, driver):
 
         for ticker in self.tickers:
+
+            if ticker in self.completed_tickers:
+                continue
 
             time.sleep(5)
 
@@ -88,7 +94,7 @@ class TVExtractor:
                 driver.get('{}/chart/{}/'.format(self.url, self.layout_id))
             except Exception as e:
                 print(e)
-                return "Failed"
+                return False
 
             time.sleep(5)
 
@@ -97,7 +103,7 @@ class TVExtractor:
                 search_btn.click()
             except Exception as e:
                 print(e)
-                return "Failed"
+                return False
 
             time.sleep(2)
 
@@ -107,7 +113,7 @@ class TVExtractor:
                 search_box.send_keys(Keys.RETURN)
             except Exception as e:
                 print(e)
-                return "Failed"
+                return False
 
             time.sleep(5)
 
@@ -149,7 +155,7 @@ class TVExtractor:
                 menu.click()
             except Exception as e:
                 print(e)
-                return "Failed"
+                return False
 
             time.sleep(3)
 
@@ -158,7 +164,7 @@ class TVExtractor:
                 exporter.click()
             except Exception as e:
                 print(e)
-                return "Failed"
+                return False
 
             time.sleep(7) 
 
@@ -169,6 +175,12 @@ class TVExtractor:
 
             action.send_keys(Keys.ENTER)
             action.perform()
+
+            time.sleep(3)
+            
+            self.completed_tickers.append(ticker)
+
+        return True
 
     def deinit(self, driver):
         driver.quit()
