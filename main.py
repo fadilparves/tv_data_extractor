@@ -10,7 +10,8 @@ load_dotenv()
 
 options = webdriver.ChromeOptions()
 options.add_argument("--start-maximized")
-driver = webdriver.Chrome("C:/\bin/\chromedriver", chrome_options=options)
+options.add_argument(r"download.default_directory=C:\Users\Mohamad Fadil\Downloads")
+driver = webdriver.Chrome("C:/\bin/\chromedriver", options=options)
 
 driver.get('https://www.tradingview.com/')
 
@@ -92,5 +93,25 @@ for i in range(20):
     action.perform()
 
 time.sleep(5)
+
+menu = driver.find_element(By.XPATH, '/html/body/div[3]/div[3]/div/div/div[1]/div[1]/div/div/div/div/div[14]/div[2]/div/div[2]/div')
+menu.click()
+
+time.sleep(3)
+
+exporter = driver.find_element(By.XPATH, '//*[@id="overlap-manager-root"]/div/span/div[1]/div/div/div[4]')
+exporter.click()
+
+time.sleep(7) 
+
+action = ActionChains(driver)
+action.send_keys(Keys.ENTER)
+action.perform()
+
+time.sleep(5)
+
+action = ActionChains(driver)
+action.send_keys(Keys.ENTER)
+action.perform()
 
 driver.quit()
