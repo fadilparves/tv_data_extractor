@@ -84,17 +84,30 @@ class TVExtractor:
 
             time.sleep(5)
 
-            driver.get('https://www.tradingview.com/chart/JqgggM9t/')
+            try:
+                driver.get('{}/chart/{}/'.format(self.url, self.layout_id))
+            except Exception as e:
+                print(e)
+                return "Failed"
 
             time.sleep(5)
 
-            search_btn = driver.find_element(By.ID, "header-toolbar-symbol-search")
-            search_btn.click()
+            try:
+                search_btn = driver.find_element(By.ID, "header-toolbar-symbol-search")
+                search_btn.click()
+            except Exception as e:
+                print(e)
+                return "Failed"
 
             time.sleep(2)
-            search_box = driver.find_element(By.XPATH, '//*[@id="overlap-manager-root"]/div/div/div[2]/div/div[2]/div[1]/input')
-            search_box.send_keys(ticker)
-            search_box.send_keys(Keys.RETURN)
+
+            try:
+                search_box = driver.find_element(By.XPATH, '//*[@id="overlap-manager-root"]/div/div/div[2]/div/div[2]/div[1]/input')
+                search_box.send_keys(ticker)
+                search_box.send_keys(Keys.RETURN)
+            except Exception as e:
+                print(e)
+                return "Failed"
 
             time.sleep(5)
 
@@ -111,7 +124,7 @@ class TVExtractor:
             action.key_up(Keys.ALT)
             action.perform()
 
-            for i in range(14):
+            for _ in range(14):
                 time.sleep(2)
 
                 action.key_down(Keys.CONTROL)
@@ -121,7 +134,7 @@ class TVExtractor:
 
             time.sleep(5)
 
-            for i in range(20):
+            for _ in range(20):
                 time.sleep(1)
 
                 action.key_down(Keys.CONTROL)
@@ -131,13 +144,21 @@ class TVExtractor:
 
             time.sleep(5)
 
-            menu = driver.find_element(By.XPATH, '/html/body/div[3]/div[3]/div/div/div[1]/div[1]/div/div/div/div/div[14]/div[2]/div/div[2]/div')
-            menu.click()
+            try:
+                menu = driver.find_element(By.XPATH, '/html/body/div[3]/div[3]/div/div/div[1]/div[1]/div/div/div/div/div[14]/div[2]/div/div[2]/div')
+                menu.click()
+            except Exception as e:
+                print(e)
+                return "Failed"
 
             time.sleep(3)
 
-            exporter = driver.find_element(By.XPATH, '//*[@id="overlap-manager-root"]/div/span/div[1]/div/div/div[4]')
-            exporter.click()
+            try:
+                exporter = driver.find_element(By.XPATH, '//*[@id="overlap-manager-root"]/div/span/div[1]/div/div/div[4]')
+                exporter.click()
+            except Exception as e:
+                print(e)
+                return "Failed"
 
             time.sleep(7) 
 
