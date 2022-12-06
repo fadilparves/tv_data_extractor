@@ -19,7 +19,7 @@ time.sleep(3)
 auth_person = driver.find_element(By.XPATH, '/html/body/div[3]/div[3]/div[2]/div[3]/button[1]')
 auth_person.click()
 
-time.sleep(2)
+time.sleep(3)
 
 sign_up_form = driver.find_element(By.XPATH, '//*[@id="overlap-manager-root"]/div/span/div[1]/div/div/div/button[1]/span/span')
 sign_up_form.click()
@@ -41,7 +41,7 @@ password_field.submit()
 
 time.sleep(5)
 
-driver.get('https://www.tradingview.com/chart')
+driver.get('https://www.tradingview.com/chart/JqgggM9t/')
 
 time.sleep(5)
 
@@ -71,6 +71,12 @@ for tfs in timeframes:
         break
 
 time.sleep(3)
+
+action = ActionChains(driver)
+action.key_down(Keys.ALT)
+action.send_keys('r')
+action.key_up(Keys.ALT)
+action.perform()
 
 for i in range(14):
     time.sleep(2)
