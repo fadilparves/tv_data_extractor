@@ -19,6 +19,3 @@ while extracted == False:
     extracted = extractor.pull_data(driver)
 
 extractor.deinit(driver)
-
-
-

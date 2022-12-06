@@ -140,7 +140,7 @@ class TVExtractor:
 
             time.sleep(5)
 
-            for _ in range(20):
+            for _ in range(30):
                 time.sleep(1)
 
                 action.key_down(Keys.CONTROL)
